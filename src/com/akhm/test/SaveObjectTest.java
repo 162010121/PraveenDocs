@@ -10,14 +10,14 @@ public class SaveObjectTest {
 	
 	public static void main(String[] args) {
 		
-		//Configuration cfg=null;
+		Configuration cfg=null;
 		SessionFactory factory=null;
-		Session ses=null;
+		Session session=null;
 		Transaction tx=null;
-		Configuration cfg=new Configuration();
+	    cfg=new Configuration();
 		cfg=cfg.configure("com/akhm/conf/hibernate.cfg.xml");
 		factory=cfg.buildSessionFactory();
-		ses=factory.openSession();
+		session=factory.openSession();
 		
 		StudentModel model=new StudentModel();
 		model.setId(1);
@@ -26,8 +26,8 @@ public class SaveObjectTest {
 		
 		try {
 			
-			tx=ses.beginTransaction();
-			ses.save(model);
+			tx=session.beginTransaction();
+			session.save(model);
 			tx.commit();
 			System.out.println("Object Is inserted");
 		} catch (Exception e) {
@@ -35,7 +35,7 @@ public class SaveObjectTest {
 			tx.rollback();
 			
 		}
-		ses.close();
+		session.close();
 		factory.close();
 		
 		
